@@ -4,7 +4,7 @@ import ShoeShop from './ShoeShop/ShoeShop';
 
 function App() {
   return (
-    <div>
+    <div className='container'>
       <ShoeShop />
     </div>
   );
