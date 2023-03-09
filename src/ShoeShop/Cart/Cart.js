@@ -1,25 +1,46 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { decreaseNumber, indcreaseNumber, removeCart } from '../../redux/action/shoeAction'
 
 class Cart extends Component {
     HandleRenderCart = () => {
         return this.props.cart.map(itemCart => {
-            let {name, price, image} = itemCart
+            let { id, name, price, image, quantity } = itemCart
             return <tr>
                 <th scope="row">{name}</th>
-                <td>{price}</td>
-                <td>Otto</td>
+                <td>{price * quantity}</td>
                 <td>
-                    <img src={image} alt={name} style={{width: 60}}/>
+                    <button
+                        onClick={() => {
+                            { this.props.HandleDecreaseNumber(id) }
+                        }}
+                        className='btn btn-danger'>-</button>
+                    <strong
+
+                        className='mx-2'>{quantity}</strong>
+                    <button
+                        onClick={() => {
+                            { this.props.HandleIncreaseNumber(id) }
+                        }}
+                        className='btn btn-success'>+</button>
+                </td>
+                <td>
+                    <img src={image} alt={name} style={{ width: 60 }} />
+                </td>
+                <td>
+                    <button
+                        onClick={() => {
+                            { this.props.HandleRemoveCart(id) }
+                        }}
+                        className='btn btn-danger'>Xóa</button>
                 </td>
             </tr>
         })
     }
     render() {
-        console.log(this.props)
         return (
             <div>
-                <table class="table">
+                <table className="table">
                     <thead>
                         <tr>
                             <th scope="col">Tên</th>
@@ -43,4 +64,19 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Cart)
+let mapDispatchToProps = (dispatch) => {
+    return {
+        HandleRemoveCart: (idShoe) => {
+            return dispatch(removeCart(idShoe))
+        },
+        HandleIncreaseNumber: (idShoe) => {
+            return dispatch(indcreaseNumber(idShoe))
+        },
+        HandleDecreaseNumber: (idShoe) => {
+            return dispatch(decreaseNumber(idShoe))
+        }
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)

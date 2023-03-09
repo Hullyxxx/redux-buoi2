@@ -1,2 +1,4 @@
 export const ADD_SHOE = 'ADD_SHOE'
 export const REMOVE_SHOE = 'REMOVE_SHOE'
+export const INCREASE_NUMBER = 'INCREASE_NUMBER'
+export const DECREASE_NUMBER = 'DECREASE_NUMBER'
